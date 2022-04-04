@@ -1,0 +1,307 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+form {
+    font-size: 2.6vh;
+    width: 43vh;
+    padding: 2vh;
+    border-radius: 5%;
+    margin: auto;
+    background-color: #ccc;
+    box-sizing: border-box;
+}
+
+form label {
+    width: 14vh;
+    font-weight: bold;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+form input, form select {
+    font-size: 2.6vh;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="password"],
+form select,
+form input[type="email"] {
+    width: 24vh;
+    padding: 1% 5%;
+    border: 1px solid #f6f6f6;
+    border-radius: 3px;
+    background-color: #f6f6f6;
+    margin: 3% 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.h-captcha {
+    width: 38vh;
+    margin: 3% 0;
+    overflow: hidden;
+    height: 5rem;
+    border-radius: 3px;
+}
+
+form input[type="submit"] {
+    width: 38vh;
+    padding: 3% 7%;
+    margin-top: 12%;
+    border: 1px solid #000;
+    border-radius: 0.8rem;
+    display: block;
+    color: #fff;
+    background-color: #000;
+}
+
+form input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+#errorCaptcha {
+    color: #560404;
+    background-color: #ff5251;
+    margin-top: 1%;
+    font-size: 2.5vh;
+}
+
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)), url("../Imgs/fondMatematicas.jpg");
+    background-size: cover;
+}
+
+/*display en movil de la parte de iniciar sesión*/
+.contenedor {
+    width: 80%;
+    margin: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.logoIni img {
+    margin: auto;
+    width: 10rem;
+}
+
+.formulario, .logoIni, .tituloRegis, .textoRegis {
+    margin: auto;
+}
+
+.tituloRegis p {
+    padding-left: 1rem;
+}
+
+.tituloRegis, .textoRegis {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.tituloRegis a, .textoRegis a {
+    color: #555555;
+}
+
+
+.container-cursos {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-cursos {
+    width: 100%;
+}
+
+.item-cursos-img img {
+    width: 100%;
+}
+
+.item-cursos-url a {
+    width: 100%;
+    background: #777777;
+    float: left;
+    margin-top: -2%;
+    text-align: center;
+}
+
+.container-cursos {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* APARTADO NOSOTROS */
+
+.container-nosotros h1 {
+    font-size: 5rem;
+    padding: 1rem;
+}
+
+.container-nosotros h2 {
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.container-nosotros p {
+    font-size: 1.4rem;
+    text-align: justify;
+    padding: 1rem;
+}
+
+.termAndconditions{
+    padding: 2rem;
+}
+
+.termAndconditions p{
+    padding-bottom: 1rem;
+}
+
+.termAndconditions h2{
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+@media (min-width: 1325px) {
+    .h-captcha {
+        width: 33vh;
+        margin: 3% 8%;
+    }
+}
+
+@media (min-width: 2000px) {
+    .h-captcha {
+        overflow: visible;
+        width: 55vh;
+        margin-left: 15%;
+    }
+}
+
+@media (min-width: 768px) {
+    .contenedor {
+        width: 40%;
+        border-left: 1px solid #000000;
+        border-right: 1px solid #000000;
+        background: white;
+    }
+
+    /*registrarse */
+    .tituloRegis p {
+        padding: 1%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-cursos {
+        margin: auto;
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 1fr;
+        grid-gap: 2rem;
+    }
+
+    .item-cursos:hover {
+        transition: 0.5s;
+        transform: scale(1.2);
+    }
+
+    .item-cursos-img img {
+        width: 100%;
+    }
+
+    .item-cursos-url a{
+        width: 100%;
+        background: #777777;
+        float: left;
+        margin-top: -2%;
+        text-align: center;
+    }
+
+}
+
+/* Index */
+
+.container-index{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+
+.popup-container {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+.boton-popup {
+    background-color: #333333;
+    width: 5rem;
+    height: 3rem;
+    padding-top: 0.8rem;
+    margin: auto;
+    border-radius: 20px;
+    margin-top: 1rem;
+
+}
+.cerrar-popup {
+    opacity: 0;
+    display: none;
+}
+
+.modal-popup {
+    background-color: #c7c7c7;
+    width: 600px;
+    max-width: 100%;
+    padding: 30px 50px;
+    border-radius: 5px;
+    box-shadow:  0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+.modal-popup h1{
+    margin-top: 0;
+
+}
+.modal-popup p{
+    opacity: 0.7;
+
+}
+
+/*Scroll
+::-webkit-scrollbar {
+    width: 10px;
+    overflow: hidden;
+}
+
+/* Track
+::-webkit-scrollbar-track {
+    overflow: hidden;
+}
+
+/* Handle
+::-webkit-scrollbar-thumb {
+    overflow: hidden;
+}
+::-webkit-scrollbar-track-piece{
+    overflow: hidden;
+}
+ Handle on hover
+::-webkit-scrollbar-thumb:hover {
+    overflow: visible;
+    background: #555;
+}*/

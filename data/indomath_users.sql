@@ -1,0 +1,3 @@
+INSERT INTO indomath.users (id, nombre, apellido, nickname, mail, contrasena, edad, docente) VALUES (1, 'User', 'User', 'admin', 'santiagoborbon@gmail.com', '$2y$10$7lSx9Siz6uDozPn.bzFqyutwKjbB7XJe9A7XvKZiqJw7MV/68bLjG', 100, true);
+INSERT INTO indomath.users (id, nombre, apellido, nickname, mail, contrasena, edad, docente) VALUES (2, 'Carlos', 'Sanchez', 'hgc88', 'carl.san.nu@gmail.com', '$2y$10$TxUxi7V5WxITF/hlHBRbHurlgOdlpN.TXXln2O/7Muk5lU7t/aCgC', 18, false);
+INSERT INTO indomath.users (id, nombre, apellido, nickname, mail, contrasena, edad, docente) VALUES (3, 'Javier', 'Borbón', 'Javi', 'jsborbon@outlook.com', '$2y$10$.uRbgePeSAlI6/CfT5mgS.8BWCBLni2RRA3TVjXxhbinvF4GiKjdC', 21, false);

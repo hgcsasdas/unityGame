@@ -1,0 +1,223 @@
+html{
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: #f6f6f6;
+}
+
+i:hover {
+    transition: 1s;
+    transform:rotate(360deg);
+}
+
+/*NAV*/
+.logo{
+    margin: 2rem;
+    width: 4rem;
+}
+.nav-bar {
+    background: #555555;
+    padding: 20px;
+    display: block;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 100%;
+}
+.fa-bars {
+    padding-right: 1rem ;
+    transform: none;
+}.fa-bars:hover {
+    transform: none;
+}
+
+ .menu, .submenu2, .submenu1{
+     list-style: none;
+     padding: 0;
+     margin: 0;
+ }
+ .menu{
+     background: #333333;
+     width: 100%;
+     margin-left: -100%;
+     height: 0;
+     transition: all 0.5s;
+ }
+ .menu__link{
+     display: block;
+     padding: 30px;
+     font-size: 1.2rem;
+     text-decoration: none;
+ }
+ .menu__link:hover{
+     background: #564e4e;
+ }
+ .submenu1, .submenu2 {
+     height: 0;
+     overflow: hidden;
+     transition: all 0.3s;
+ }
+
+ .submenu1 .menu__link, .submenu2 .menu__link{
+     background: #777777;
+     padding-left: 50px;
+ }
+ .mostrar{
+     margin-left: 0;
+     height: auto;
+ }
+ .desplegar {
+     height: auto;
+     overflow: visible;
+ }
+ @media (min-width: 1024px) {
+     .logo {
+         margin: 0.4rem;
+         width: 5rem;
+     }
+     .nav-bar {
+         display: none;
+     }
+     .menu {
+         margin-left: 0;
+         display: flex;
+         height: auto;
+     }
+     .container-submenu{
+         position: relative;
+     }
+     .menu__link{
+         margin-top: 0.4rem;
+
+     }
+     .submenu1 .menu__link, .submenu2 .menu__link{
+         margin-top: 0;
+     }
+     .submenu1 .menu__link:hover, .submenu2 .menu__link:hover {
+         background: #564e4e;
+     }
+     .submenu1, .submenu2{
+
+         position: absolute;
+         top: 60px;
+         width: 200px;
+         overflow: visible;
+         z-index: 1000;
+         opacity: 0;
+         visibility: hidden;
+     }
+     .container-submenu:hover .submenu1, .container-submenu:hover .submenu2{
+         opacity: 1;
+         visibility: visible;
+     }
+ }
+/*Footer*/
+footer {
+    background-color: #555555;
+    color: #bbb;
+    line-height: 1.5;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.ft-title {
+    color: #fff;
+    font-family: ’Merriweather’, serif;
+    font-size: 1.375rem;
+    padding-bottom: 0.625rem;
+}
+
+.container {
+    flex: 1;
+}
+.ft-main {
+    padding: 1.25rem 1.875rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.serviciosFooter {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    max-width: 75rem;
+}
+.serviciosFooter a {
+    display: inline-block;
+    padding: 1rem;
+}
+.ft-social {
+    padding: 0 1.875rem 1.25rem;
+}
+.ft-social-list {
+    display: flex;
+    justify-content: center;
+    border-top: 1px #777 solid;
+    padding-top: 1.25rem;
+}
+.ft-social-list li {
+    margin: 0.5rem;
+    font-size: 1.25rem;
+}
+
+/*parte legal*/
+.ft-legal {
+    padding: 0.9375rem 1.875rem;
+    background-color: #333;
+}
+.ft-legal-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.ft-legal-list li {
+    margin: 0.125rem 0.625rem;
+    white-space: nowrap;
+}
+
+.ft-legal-list li:nth-last-child(2) {
+    flex: 1;
+}
+.fa-instagram:hover{
+    color: white;
+    background-image: linear-gradient(175deg, #e1b442 0, #eaab40 6.25%, #f2a040 12.5%, #f99541 18.75%, #fe8743 25%, #ff7847 31.25%, #ff664b 37.5%, #ff5251 43.75%, #ff3858 50%, #fa0c60 56.25%, #f4006b 62.5%, #ec0077 68.75%, #e10085 75%, #d40094 81.25%, #c400a4 87.5%, #af00b5 93.75%, #9600c4 100%);
+    border-radius: 100%;
+ }
+.fa-twitch:hover{
+    color: #9600c4;
+    border-radius: 50%;
+}
+.fa-youtube:hover{
+    color: red;
+    border-radius: 50%;
+}
+.fa-envelope:hover{
+    color: #ffdd00;
+    border-radius: 50%;
+}
+.fa-phone:hover{
+    color: green;
+    border-radius: 50%;
+}
+
+
+@media (min-width: 2040px) {
+    footer{
+        height: 40vh;
+    }
+}
+@media (min-width: 2200px) {
+    footer{
+        height: 60vh;
+    }
+}

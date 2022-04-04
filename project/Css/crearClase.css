@@ -1,0 +1,34 @@
+.container-formulario-anadir {
+    width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+}
+.rellenar{
+    width: 100%;
+}
+
+#agregarLecciones {
+    width: 100%;
+}
+.listaFormulario{
+    margin: 1rem;
+}
+.listaFormulario input[type="text"], .listaFormulario input[type="number"], .listaFormulario select, .listaFormulario textarea{
+    margin: 1rem;
+    width: 80%;
+    padding: 0.5rem;
+}
+.listaFormulario input[type="number"]{
+    width: 45%;
+}
+.listaFormulario label{
+    width: 24vh;
+}
+.buttonFormulario{
+    margin-top: 1rem;
+    margin: auto;
+    width: 20%;
+    height: 1.2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
