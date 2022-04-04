@@ -4,7 +4,7 @@
 
 
      public function guardarEnDB($tabla, $datos) {
-         $exito = false;
+         $exito = 0;
          $conexion = new Bd();
          if ($tabla == "users") {
              $exito = $conexion->insertarUsuarios($datos);

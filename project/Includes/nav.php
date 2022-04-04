@@ -10,10 +10,11 @@
                 <li class="menu__item"><a href="cursos.php" class="menu__link">Cursos</a></li>
                 <li class="menu__item"><a href="#" class="menu__link">Exámenes resueltos</a></li>
                 <li class="menu__item"><a href="#" class="menu__link">Pregunta a tu profe</a></li>
+                <li class="menu__item"><a href="classCreator.php" class="menu__link">Crear clases</a></li>
             </ul>
         </li>
 
-        <li class="menu__item" id="Plataformas"><a href="" class="menu__link">Plataformas</a></li>
+        <li class="menu__item" id="Plataformas"><a href="plataformas.php" class="menu__link">Plataformas</a></li>
         <li class="menu__item"><a href="nosotros.php" class="menu__link">Nosotros</a></li>
         <li class="menu__item container-submenu">
             <a href="#" class="menu__link submenu-btn" onclick="desplegarSubmenu1()">Iniciar Sesión <span class="drop-down"><i class="fa-solid fa-angle-down"></i></span></a>

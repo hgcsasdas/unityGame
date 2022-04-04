@@ -12,7 +12,7 @@
                 <a href="classAssetIntroduction.php?id=1" ><img src="Imgs/1bach.jpg" alt=""></a>
             </div>
             <div class="item-cursos-url">
-                <a href="classAssetIntroduction.php">1 bach mates ciencias</a>
+                <a href="classAssetIntroduction.php?id=1">1 bach mates ciencias</a>
             </div>
         </div>
         <div class="item-cursos">
@@ -20,7 +20,7 @@
                 <a href="classAssetIntroduction.php?id=2"><img src="Imgs/1bach.jpg" alt=""></a>
             </div>
             <div class="item-cursos-url">
-                <a href="#">1 bach mates letras</a>
+                <a href="classAssetIntroduction.php?id=2">1 bach mates letras</a>
             </div>
         </div>
       

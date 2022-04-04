@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="Css/styles.css">
     <link rel="stylesheet" href="Css/nf.css">
+    <link rel="stylesheet" href="Css/indes.css">
+    <link rel="stylesheet" href="Css/plat.css">
     <link rel="icon" type="image/jpeg" href="Imgs/logo.jpeg">
     <script src="Js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

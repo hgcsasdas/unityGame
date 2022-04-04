@@ -15,21 +15,21 @@ if (isset($_GET) && !empty($_GET)){
 
     $controller = new controller();
 
-    $exito =  $controller->leerEnDB("clases", $_GET);
+    $exito =  $controller->leerEnDB("classes", $_GET);
     foreach ($exito as $item=>$value){
         $$item = $value;
     }
-    /* lo q tengo q hacer es, coger todos los datos que me han llegao ponérselos de valor a las variables e imprimirlos.*/
-
     $tituloModulo = $titulo;
     $tituloClase = $nombre;
+    $introduccion = $resumen;
     $numLecciones = $numLecciones;
     $duracionLeccion = $cduracion;
     $duracionExamen = $eduracion;
     $duracionTotal = $duracionLeccion + $duracionExamen;
     $fuenteVideo = $video;
     $descripcionClase = $contenido;
-
+    $id=$id_modulo;
+    $examen=$examenURL;
 
 }
 ?>
@@ -38,27 +38,20 @@ if (isset($_GET) && !empty($_GET)){
     <h1 class="tituloClase"><?php echo $tituloClase ?></h1>
     <aside class="claseContenido">
         <ul class="listaClases">
-            <li><a href="classAssetIntroduction.php">Resumen del tema</a></li>
+            <li><a href="<?php echo 'classAssetIntroduction.php?id='.$id?>">Resumen del tema</a></li>
             <li id="lecciones">Lecciones <strong><?php echo $numLecciones?></strong></li>
             <li>
                 <a href="#" class="menuClases" onclick="desplegarSubmenu2()">Leccion 1 <strong><?php echo $duracionTotal?> min</strong><i class="fa-solid fa-angle-down"></i></></a>
                 <ul class="desplegableClases">
-                    <li><a href="classAsset.php">Estudia<strong><?php echo $duracionLeccion?> min</strong></a></li>
-                    <li><a href=examAsset.php>Practica<strong><?php echo $duracionExamen?> min</strong></a></li>
+                    <li><a href="<?php echo 'classAsset.php?id='.$id?>">Estudia<strong><?php echo $duracionLeccion?> min</strong></a></li>
+                    <li><a href="<?php echo 'examAsset.php?id='.$id?>">Practica<strong><?php echo $duracionExamen?> min</strong></a></li>
                 </ul>
             </li>
         </ul>
     </aside>
     <section class="claseContenido">
-        <div id="reproductor">
-            <iframe width="100%" height="100%" src="<?php echo $fuenteVideo?>"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-        </div>
-        <a href="examAsset.php"><button id="testUnidad">Comprueba tus conocimientos</button></a>
-        <div class="contenidoClase">
-            <p><?php echo $descripcionClase?></p>
+        <div class="examenContendor">
+            <?php echo $examen?>
         </div>
     </section>
 </main>

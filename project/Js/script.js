@@ -24,14 +24,14 @@ function cerrar(){
 }
 
 function setCookie() {
-    document.cookie = "Indomath=yes; path=/; ;domain=127.0.0.1";
+    document.cookie = "Indomath=yes, domain=127.0.0.1";
 }
 
 function checkCookie() {
     let todasLasCookies = document.cookie;
-    if (todasLasCookies != "") {
+    if (todasLasCookies !== "") {
         cerrar();
     }else{
-
+       setCookie();
     }
 }

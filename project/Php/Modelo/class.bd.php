@@ -25,15 +25,14 @@ class Bd{
 
     public function insertarUsuarios($datos){
 
-        $registroExitoso = true;
+        $registroExitoso = 1;
         $campoEmail = 3;
         $contadorCampos=0;
         $claves  = array();
         $valores = array();
-
         foreach ($datos as $clave => $valor){
 
-            if($clave != "id" && $clave != "confirmacion") {
+            if($clave != "id" && $clave != "confirmacion" && $clave != "h-captcha-response" && $clave != "g-recaptcha-response") {
                 $claves[] = addslashes($clave);
                 if($clave == "mail") {
                     $campoEmail=$contadorCampos;
@@ -48,12 +47,10 @@ class Bd{
         }
 
         if($this->verificarUsuario($valores[$campoEmail])==0) {
-            $sql = "insert into users (" . implode(',', $claves) . ") 
-            values  (" . implode(',', $valores) . ")";
+            $sql = "insert into users (" . implode(', ', $claves) . ") values (" . implode(', ', $valores) . ")";
             $this->resultado = $this->conexion->query($sql);
-
         }else{
-            $registroExitoso=false;
+            $registroExitoso=0;
         }
 
         return $registroExitoso;
@@ -108,11 +105,9 @@ class Bd{
         $tabla = "classes";
 
         $codigoModulo = $datos['id'];
-        $sql  = 'select upper(m.titulo) as titulo, c.nombre, (select count(*) from ' . $tabla . ' as c join modules m on c.codigo_modulo = m.id_modulo where c.codigo_modulo = m.id_modulo) as "numLecciones", c.duracion as cduracion, e.duracion as eduracion, c.video, c.contenido from ' . $tabla . ' as c join modules m on c.codigo_modulo = m.id_modulo join exam e on e.cod_examen = c.codigo_examen where codigo_modulo=' . $codigoModulo ;
+        $sql  = 'select m.id_modulo, upper(m.titulo) as titulo, c.nombre, m.resumen, (select count(*) from ' . $tabla . ' as c join modules m on c.codigo_modulo = '.$codigoModulo.' where c.codigo_modulo = m.id_modulo) as "numLecciones", c.duracion as cduracion, e.duracion as eduracion, e.contenido as examenURL, c.video, c.contenido from ' . $tabla . ' as c join modules m on c.codigo_modulo = m.id_modulo join exam e on e.cod_examen = c.codigo_examen where codigo_modulo=' . $codigoModulo ;
         $data = $this->conexion->query($sql);
-
         $dataarray = (mysqli_fetch_assoc($data));
-
         return $dataarray;
 
     }

@@ -8,23 +8,20 @@ require "php/Controlador/Controller.php";
 
 ?>
 <?php
-//poner cursos en mayusculas
-$courses= [array("id" => 0, "name"=>"1 bach mates ciencias"),
-    array("id" => 1, "name"=>"1 bach mates letras"),
-    array("id" => 2, "name"=>"2 bach mates ciencias"),
-    array("id" => 3, "name"=>"2 bach mates letras"),
-    array("id" => 4, "name"=>"Carrera ADE")];
 
-$clasesOfrecidas= json_encode($courses);
+$controlador = new Controller();
+$modulos =  $controlador->leerEnDB("modules", "clases");
+
+$clasesOfrecidas= json_encode($modulos);
+
 echo "<script type='module'>mostrarModulos($clasesOfrecidas)</script>";
 ?>
 <?php
 if (isset($_POST) && !empty($_POST)) {
-
     $user = new Usuario();
     $controlador = new Controller();
     if ($controlador->verificarCaptcha($_POST['h-captcha-response'])) {
-        if ($controlador->guardarEnDB($_POST)) {
+        if ($controlador->guardarEnDB("users",$_POST)) {
             echo '<div><script type="module">correctRegister()</script></div>';
         } else {
             echo '<div><script type="module">failedRegister()</script></div>';

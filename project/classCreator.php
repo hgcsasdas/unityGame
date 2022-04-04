@@ -14,7 +14,7 @@ require "php/Controlador/Controller.php";
 //poner cursos en mayusculas
 $controller = new controller();
 
-$modulos =  $controller->leerEnDB("modules", "clases");
+$modulos =  $controller->leerEnDB("modules", "");
 
 $clasesOfrecidas= json_encode($modulos);
     echo "<script type='module'>mostrarModulos($clasesOfrecidas)</script>";

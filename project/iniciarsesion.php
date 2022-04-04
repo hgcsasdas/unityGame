@@ -11,7 +11,7 @@ if(isset($_POST) && !empty($_POST)){
     $user = new Usuario();
     $controlador = new Controller();
 if($controlador->verificarCaptcha($_POST['h-captcha-response'])) {
-    if($controlador->leerEnDB($_POST)){
+    if($controlador->leerEnDB("users",$_POST)){
 
         echo '<div><script type="module">correctLogin()</script></div>';
     }else{

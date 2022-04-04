@@ -1,0 +1,32 @@
+.contender {
+    display: flex;
+    flex-direction: column;
+}
+/*spsrtsdo yt*/
+.yt {
+    padding: 2rem;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.izq img{
+    width: 90%;
+}.der img{
+    width: 30%;
+    height: 70%;
+}
+.izq {
+    width: 50%;
+}
+.der {
+    width: 50%;
+    text-align: center;
+}
+.der p, der h2 {
+    padding-top: 2rem;
+
+}
+.ft-twich img{
+    width: 30%;
+}
