@@ -25,10 +25,46 @@ if (isset($_POST) && !empty($_POST)){
             echo '<div><script type="module">failedRegister()</script></div>';
         }
     }
+if(isset($_GET) && !empty($_GET)){
+    $datos =  ($controller->leerEnDB("classes2", $_GET));
+
+    echo "<script type='module'>llenarDatos(".$_GET['c'].", ".$datos.");</script>";
+}
 
 ?>
 <body>
+<script>
+    function llenarDatos(id, clase){
 
+        let indiceClase=0;
+        for (let i=0;i<clase.length;i++){
+            if(clase[i]['codigo_clase']==id){
+                indiceClase=i;
+            }
+        }
+
+        let leccion = clase[indiceClase];
+        let leccionArray = new Array();
+        console.log(leccion);
+
+        for(let i in leccion){
+            leccionArray.push(leccion[i]);
+        }
+        console.log(leccionArray);
+        let campos = document.getElementsByTagName("input");
+        let modulo = document.getElementsByTagName("select");
+        let desc = document.getElementsByTagName("textarea")
+        // nombre: input, video: input, duracion: input, examen: input, duracionEx: input]
+        campos[0].value =leccionArray[3];
+        modulo[0].value =leccionArray[1];
+        campos[1].value =leccionArray[10];
+        campos[2].value =leccionArray[5];
+        campos[3].value =leccionArray[9];
+        campos[4].value =leccionArray[6];
+        desc[0].value =leccionArray[11];
+
+    }
+</script>
 <script class="sweetAlertFunctions">
     function correctRegister() {
         Swal.fire({

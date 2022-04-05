@@ -13,7 +13,9 @@ section {
     width: 100%;
 }
 
-
+.editarClase{
+    color: #555555;
+}
 aside {
     width: 40%;
     padding-right: 2%;

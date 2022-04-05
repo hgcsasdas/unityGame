@@ -60,8 +60,10 @@ if (isset($_GET) && !empty($_GET)){
 
         let clase = document.querySelector("iframe");
         clase.src = clases[indiceClase]['video'];
-        document.querySelector(".contenidoClase").innerHTML = "<p>"+clases[indiceClase]['contenido']+"</p>";
-        }
+        document.querySelector(".tituloClase").innerHTML = clases[indiceClase]['nombre'];
+       document.querySelector(".contenidoClase").innerHTML = "<p><br>"+clases[indiceClase]['contenido']+"</p><br><a class= 'editarClase' href='classCreator.php?id="+clases[indiceClase]['id_modulo']+"&c="+clases[indiceClase]['codigo_clase']+"' >Editar Clase</a>";
+
+    }
 
 </script>
 <main>

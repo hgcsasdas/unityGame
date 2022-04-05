@@ -105,6 +105,7 @@ if (isset($_POST) && !empty($_POST)) {
 
             if (formulario.getElementsByTagName('input')[cont].value === "") {
                 ok = false;
+                alert("Te faltan campos por rellenar")
             }
             cont++;
         }
@@ -143,13 +144,13 @@ if (isset($_POST) && !empty($_POST)) {
             <p>Volver al inicio <a href="index.php">aqui</a></p>
         </div>
         <form name="formDatosPersonales" action="<?PHP $_SERVER['PHP_SELF'] ?>" onsubmit="return verificarDatos();" method="post" enctype="application/x-www-form-urlencoded">
-            <label for="nombre">Nombre: </label><input name="nombre" id="nombre" required type="text" maxlength="20" placeholder="Nombre">
-            <label for="apellido">Apellido: </label><input name="apellido" id="apellido" required type="text" maxlength="20" placeholder="Apellidos">
-            <label for="nickname">Nickname: </label><input name="nickname" id="nickname" required type="text" maxlength="20" placeholder="Nickname">
-            <label for="mail">Correo electrónico: </label><input name="mail" id="mail" required type="email" placeholder="Mail">
-            <label for="contrasena">Contraseña: </label><input name="contrasena" id="contrasena" required type="password" minlength="8" placeholder="Contraseña">
-            <label for="confirmacion">Confirma la contraseña: </label><input name="confirmacion" id="confirmacion" required type="password" minlength="8" placeholder="Contraseña">
-            <label for="edad">Edad: </label><input name="edad" id="edad" required type="number" placeholder="15" min="15">
+            <label for="nombre">Nombre: </label><input name="nombre" id="nombre" type="text" maxlength="20" placeholder="Nombre">
+            <label for="apellido">Apellido: </label><input name="apellido" id="apellido" type="text" maxlength="20" placeholder="Apellidos">
+            <label for="nickname">Nickname: </label><input name="nickname" id="nickname" type="text" maxlength="20" placeholder="Nickname">
+            <label for="mail">Correo electrónico: </label><input name="mail" id="mail" type="email" placeholder="Mail">
+            <label for="contrasena">Contraseña: </label><input name="contrasena" id="contrasena" type="password" minlength="8" placeholder="Contraseña">
+            <label for="confirmacion">Confirma la contraseña: </label><input name="confirmacion" id="confirmacion" type="password" minlength="8" placeholder="Contraseña">
+            <label for="edad">Edad: </label><input name="edad" id="edad" type="number" placeholder="15" min="15">
             <label for="curso">Matemáticas que estás estudiando: </label><select name="curso" id="curso"></select>
             <div id="errorCaptcha"></div>
             <div class="h-captcha" id="captcha" data-sitekey="eb2c600f-ee5c-40b1-a0cb-26e2a0c4da53" ></div>
