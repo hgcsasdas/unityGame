@@ -12,11 +12,22 @@ function desplegarSubmenu1(){
     subMenuBtn.classList.toggle("desplegar");
 
 }
+function desplegarSubmenu1(){
+    const subMenuBtn = document.querySelector(".submenu2");
+    subMenuBtn.classList.toggle("desplegar");
+
+}
 function desplegarSubmenu2(){
     const subMenuBtn2 = document.querySelector(".desplegableClases");
     subMenuBtn2.classList.toggle("clasesDesplegada");
 
 }
+function desplegarSubmenu3(){
+    const subMenuBtn = document.querySelector(".submenu3");
+    subMenuBtn.classList.toggle("desplegar");
+
+}
+
 function cerrar(){
     const close = document.querySelector(".popup-container");
     close.classList.toggle("cerrar-popup");

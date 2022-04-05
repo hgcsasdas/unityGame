@@ -10,6 +10,8 @@
              $exito = $conexion->insertarUsuarios($datos);
          }elseif ($tabla == "classes") {
              $exito = $conexion->insertarClases($datos);
+         }elseif ($tabla == "cursos") {
+             $exito = $conexion->insertarCursos($datos);
          }
          return $exito;
      }
@@ -24,7 +26,7 @@
          }elseif ($tabla == "classes2") {
              $exito = $conexion->listarClases($datos);
          }elseif ($tabla == "modules"){
-             $exito = $conexion->consultarModulos($datos);
+             $exito = $conexion->listarCursos();
          }
 
          return $exito;

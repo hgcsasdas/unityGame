@@ -188,6 +188,41 @@ class Bd{
             return $registroExitoso;
         }
 
+    public function listarCursos(){
+        $tabla = "modules";
+        $sql  = 'select * from ' . $tabla;
+        $data = $this->conexion->query($sql);
+        $curses=array();
+        while($row = mysqli_fetch_assoc($data)){
+            $curses[] = $row;
+        }
+        $modules = json_encode($curses);
+        return $modules;
+
+    }
+
+    public function insertarCursos($datos){
+            $registroExitoso = 1;
+            $claves  = [addslashes("id_profesor")];
+            $valores = [addslashes("1")];
+
+            foreach ($datos as $clave => $valor){
+                if ($clave != "id") {
+                    $claves[] = addslashes($clave);
+                    $valores[] = ("'" . addslashes($valor) . "'");
+
+                }
+            }
+
+                $sql = "insert into modules (" . implode(', ', $claves) . ") values (" . implode(', ', $valores) . ")";
+                $resultado = $this->conexion->query($sql);
+                if($resultado<0){
+                    $registroExitoso = 0;
+                }
+
+            return $registroExitoso;
+        }
+
 
     public function consultarModulos($datos){
         $sql = 'select id_modulo, titulo from modules';

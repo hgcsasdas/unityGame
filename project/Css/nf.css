@@ -40,7 +40,7 @@ i:hover {
     transform: none;
 }
 
- .menu, .submenu2, .submenu1{
+ .menu, .submenu3, .submenu2, .submenu1{
      list-style: none;
      padding: 0;
      margin: 0;
@@ -61,13 +61,13 @@ i:hover {
  .menu__link:hover{
      background: #564e4e;
  }
- .submenu1, .submenu2 {
+ .submenu1, .submenu2, .submenu3 {
      height: 0;
      overflow: hidden;
      transition: all 0.3s;
  }
 
- .submenu1 .menu__link, .submenu2 .menu__link{
+ .submenu1 .menu__link, .submenu2 .menu__link, .submenu3 .menu__link{
      background: #777777;
      padding-left: 50px;
  }
@@ -99,13 +99,13 @@ i:hover {
          margin-top: 0.4rem;
 
      }
-     .submenu1 .menu__link, .submenu2 .menu__link{
+     .submenu1 .menu__link, .submenu2 .menu__link, .submenu3 .menu__link{
          margin-top: 0;
      }
-     .submenu1 .menu__link:hover, .submenu2 .menu__link:hover {
+     .submenu1 .menu__link:hover, .submenu2 .menu__link:hover, .submenu3 .menu__link:hover {
          background: #564e4e;
      }
-     .submenu1, .submenu2{
+     .submenu1, .submenu2, .submenu3{
 
          position: absolute;
          top: 60px;
@@ -115,7 +115,7 @@ i:hover {
          opacity: 0;
          visibility: hidden;
      }
-     .container-submenu:hover .submenu1, .container-submenu:hover .submenu2{
+     .container-submenu:hover .submenu1, .container-submenu:hover .submenu2, .container-submenu:hover .submenu3{
          opacity: 1;
          visibility: visible;
      }
