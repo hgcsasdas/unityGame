@@ -16,9 +16,7 @@ require "php/Controlador/Controller.php";
 $controller = new controller();
 
 $modulos =  $controller->leerEnDB("modules", "");
-
-$clasesOfrecidas= json_encode($modulos);
-    echo "<script type='module'>mostrarModulos($clasesOfrecidas)</script>";
+    echo "<script type='module'>mostrarModulos($modulos)</script>";
 
 if (isset($_POST) && !empty($_POST)){
     if ($controller->guardarEnDB("classes",$_POST)) {
@@ -78,8 +76,8 @@ if (isset($_POST) && !empty($_POST)){
         modulos.appendChild(option);
         for (let i=0;i<cursos.length;i++){
             let option = document.createElement("option");
-            let personalizeOption = document.createTextNode(cursos[i].name);
-            option.value=cursos[i].id;
+            let personalizeOption = document.createTextNode(cursos[i]["titulo"]);
+            option.value=cursos[i]["id_modulo"];
             option.appendChild(personalizeOption);
             modulos.appendChild(option);
         }
