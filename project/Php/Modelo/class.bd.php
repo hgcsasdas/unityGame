@@ -8,7 +8,6 @@ class Bd{
     private $basedatos = "indomath";
 
     private $conexion;
-    private $resultado;
 
 
     public function __construct(){
@@ -48,7 +47,7 @@ class Bd{
 
         if($this->verificarUsuario($valores[$campoEmail])==0) {
             $sql = "insert into users (" . implode(', ', $claves) . ") values (" . implode(', ', $valores) . ")";
-            $this->resultado = $this->conexion->query($sql);
+            $resultado = $this->conexion->query($sql);
         }else{
             $registroExitoso=0;
         }
@@ -74,9 +73,9 @@ class Bd{
 
     public function consultaSimple($consulta){
         //echo "el sql".$consulta ."fin";
-        $this->resultado =   $this->conexion->query($consulta);
+        $resultado =   $this->conexion->query($consulta);
 
-        $res = mysqli_fetch_assoc($this->resultado);
+        $res = mysqli_fetch_assoc($resultado);
 
         return $res;
     }
@@ -89,9 +88,9 @@ class Bd{
             $$clave = $valor;
         }
         $sql = 'select contrasena from '.$tabla.' where mail = "' . $mail.'"';
-        $this->resultado =   $this->conexion->query($sql);
+        $resultado =   $this->conexion->query($sql);
         try {
-            $pass = implode(mysqli_fetch_assoc($this->resultado));
+            $pass = implode(mysqli_fetch_assoc($resultado));
             if (password_verify($contrasena, $pass)) {
                 $validadoCorrecto = 1;
             }
@@ -109,8 +108,70 @@ class Bd{
         $data = $this->conexion->query($sql);
         $dataarray = (mysqli_fetch_assoc($data));
         return $dataarray;
-
     }
+
+    public function insertarClases($datos){
+
+            $registroExitoso = 1;
+            $campoExamen = "";
+            $clavesLeccion  = [addslashes("codigo_examen"), addslashes("codigo_profesor"), addslashes("codigo_alumno")];
+            $clavesExamen  = [addslashes("id_profesor"), addslashes("id_alumno")];
+            $valoresLeccion = [addslashes("1"),addslashes("1")];
+            $valoresExamen = [addslashes("1"),addslashes("1")];
+            foreach ($datos as $clave => $valor){
+
+                if ($clave != "id") {
+                    if ($clave == "duracionEx" || $clave == "examen") {
+                        if($clave == "examen"){
+                            $clavesExamen[] = addslashes("contenido");
+                        }else{
+                            $clavesExamen[] =  addslashes("duracion");
+                        }
+                    }else {
+                        $clavesLeccion[] = addslashes($clave);
+                    }
+                    if ($clave == "video") {
+                        try {
+                            $urlFragmentos = explode("&", explode("=", $valor)[1]);
+                            $valor = "https://www.youtube.com/embed/" . $urlFragmentos[0];
+                        } catch (TypeError $te) {
+                            $valor = "https://www.youtube.com/embed/xoidoibP1Qs";
+                        }
+                    }
+                    if ($clave == "examen") {
+                        $urlFragmentos = explode("worksheet", explode('" style="width:100 % ">', $valor)[0]);
+                        $urlFragmentos2 = explode("span>", $valor)[1];
+                        $urlIdExamen = explode('" style="', $urlFragmentos[1])[0];
+                        $valor = $urlFragmentos[0] . 'worksheet' . $urlIdExamen . '"> ' . $urlFragmentos2;
+                        $valor = str_replace("'", '"', $valor);
+                        $campoExamen = $valor;
+                    }
+                    if ($clave == "duracionEx" || $clave == "examen") {
+
+                        $valoresExamen[] = ("'" . addslashes($valor) . "'");
+                    } else {
+                    $valoresLeccion[] = ("'" . addslashes($valor) . "'");
+                }
+                }
+            }
+
+                $sqlExamenes = "insert into exam (" . implode(', ', $clavesExamen) . ") values (" . implode(', ', $valoresExamen) . ")";
+                $resultado = $this->conexion->query($sqlExamenes);
+                $sqlCodigoExamen = 'select cod_examen from exam where cod_examen = (select count(*) from exam)';
+                $codigoExamen = $this->conexion->query($sqlCodigoExamen);
+                $sqlLecciones = "insert into classes (" . implode(', ', $clavesLeccion) . ") values (" . implode(mysqli_fetch_assoc($codigoExamen)).', '. implode(', ', $valoresLeccion) . ")";
+                $resultado2 = $this->conexion->query($sqlLecciones);
+
+                if($resultado<0 || $resultado2<0){
+                    $registroExitoso = 0;
+                }else{
+                    $registroExitoso = 1;
+                }
+
+            return $registroExitoso;
+        }
+
+
     public function consultarModulos($datos){
         $sql = 'select id_modulo, titulo from modules';
         $data = $this->conexion->query($sql);
@@ -130,8 +191,8 @@ class Bd{
     }
 
     public function consulta($consulta){
-        $this->resultado =   $this->conexion->query($consulta);
-        $res = $this->resultado ;
+        $resultado =   $this->conexion->query($consulta);
+        $res = $resultado ;
         return $res;
     }
 
