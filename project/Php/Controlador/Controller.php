@@ -21,6 +21,8 @@
              $exito = $conexion->consultarUsuarios($datos);
          }elseif ($tabla == "classes") {
              $exito = $conexion->consultarClases($datos);
+         }elseif ($tabla == "classes2") {
+             $exito = $conexion->listarClases($datos);
          }elseif ($tabla == "modules"){
              $exito = $conexion->consultarModulos($datos);
          }

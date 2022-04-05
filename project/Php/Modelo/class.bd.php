@@ -110,6 +110,23 @@ class Bd{
         return $dataarray;
     }
 
+
+    public function listarClases($datos){
+        $tabla = "classes";
+
+        $codigoModulo = $datos['id'];
+        $sql  = 'select c.codigo_clase, m.id_modulo, upper(m.titulo) as titulo, c.nombre, m.resumen, (select count(*) from ' . $tabla . ' as c join modules m on c.codigo_modulo = '.$codigoModulo.' where c.codigo_modulo = m.id_modulo) as "numLecciones", c.duracion as cduracion, c.codigo_examen, e.duracion as eduracion, e.contenido as examenURL, c.video, c.contenido from ' . $tabla . ' as c join modules m on c.codigo_modulo = m.id_modulo join exam e on e.cod_examen = c.codigo_examen where codigo_modulo=' . $codigoModulo ;
+        $data = $this->conexion->query($sql);
+        $clases=array();
+        while($row = mysqli_fetch_assoc($data)){
+            $clases[] = $row;
+        }
+        $lecciones = json_encode($clases);
+
+        return $lecciones;
+
+    }
+
     public function insertarClases($datos){
 
             $registroExitoso = 1;
