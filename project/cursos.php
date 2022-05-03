@@ -3,7 +3,8 @@
 <?php
 include "Includes/head.php";
 include "Includes/nav.php";
-require "php/Modelo/class.bd.php";
+require_once "php/Modelo/classes.bd.php";
+require_once "php/Modelo/users.bd.php";
 require "php/Controlador/Controller.php";
 ?>
 <?php
@@ -12,6 +13,13 @@ $controller = new controller();
 
 $modulos =  $controller->leerEnDB("modules", "");
 echo "<script type='module'>mostrarModulos($modulos)</script>";
+
+//delete curso
+if (isset($_POST) && !empty($_POST)) {
+    echo json_encode($_POST);
+    //echo "<script>window.location.replace(this)</script>";
+}
+
 ?>
 <script>
     function mostrarModulos(cursos) {

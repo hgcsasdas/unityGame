@@ -21,7 +21,7 @@
 </script>
 <?php
 require "php/Modelo/Usuario.php";
-require "php/Modelo/class.bd.php";
+require "php/Modelo/users.bd.php";
 
 if(isset($_POST) && !empty($_POST)) {
     session_start();

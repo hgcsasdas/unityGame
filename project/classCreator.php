@@ -8,7 +8,7 @@
 include "Includes/head.php";
 include "Includes/nav.php";
 require "php/Modelo/Usuario.php";
-require "php/Modelo/class.bd.php";
+require "php/Modelo/classes.bd.php";
 require "php/Controlador/Controller.php";
 ?>
 <?php
@@ -19,13 +19,27 @@ $modulos =  $controller->leerEnDB("modules", "");
     echo "<script type='module'>mostrarModulos($modulos)</script>";
 
 if (isset($_POST) && !empty($_POST)){
+    if(isset($_GET['id']) && !empty($_GET['id'])){
+        //actualizaregistro
+        $_POST['id'] = $_GET['id'];
+        $_POST['codigo_clase'] = $_GET['c'];
+        $_PUT = $_POST;
+        if ($controller->actualizarEnDB("classes",$_PUT)) {
+            echo '<div><script type="module">correctUpdater()</script></div>';
+        } else {
+            echo '<div><script type="module">failedUpdater()</script></div>';
+        }
+
+    }else{
     if ($controller->guardarEnDB("classes",$_POST)) {
             echo '<div><script type="module">correctRegister()</script></div>';
         } else {
             echo '<div><script type="module">failedRegister()</script></div>';
         }
     }
+}
 if(isset($_GET) && !empty($_GET)){
+
     $datos =  ($controller->leerEnDB("classes2", $_GET));
 
     echo "<script type='module'>llenarDatos(".$_GET['c'].", ".$datos.");</script>";
@@ -54,15 +68,23 @@ if(isset($_GET) && !empty($_GET)){
         let campos = document.getElementsByTagName("input");
         let modulo = document.getElementsByTagName("select");
         let desc = document.getElementsByTagName("textarea")
-        // nombre: input, video: input, duracion: input, examen: input, duracionEx: input]
+
         campos[0].value =leccionArray[3];
         modulo[0].value =leccionArray[1];
         campos[1].value =leccionArray[10];
         campos[2].value =leccionArray[5];
         campos[3].value =leccionArray[9];
-        campos[4].value =leccionArray[6];
+        campos[4].value =leccionArray[8];
         desc[0].value =leccionArray[11];
 
+        let eliminarLista = document.createElement("li");
+        let eliminarOption = document.createElement("a");
+        let eliminarText = document.createTextNode("Eliminar");
+        eliminarOption.setAttribute("href", "javascript:confirmationDelete()");
+        eliminarOption.setAttribute("class", "eliminar");
+        eliminarOption.appendChild(eliminarText);
+        eliminarLista.appendChild(eliminarOption);
+        document.getElementsByClassName("listaFormulario")[0].appendChild(eliminarLista);
     }
 </script>
 <script class="sweetAlertFunctions">
@@ -83,6 +105,40 @@ if(isset($_GET) && !empty($_GET)){
         });
     }
 
+    function confirmationDelete() {
+        Swal.fire({
+            title: '¿Desea eliminar la clase?',
+            text: "¡No podrá revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, eliminarla!',
+            cancelButtonText: '¡No, mantenerla!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Eliminada!',
+                    'La clase ha sido eliminada satisfactoriamente.',
+                    'success'
+                )
+                setTimeout((redireccionar)=>{
+                    let f = document.createElement('datosAEliminar');
+                    f.action='cursos.php';
+                    f.method='POST';
+
+                    var i=document.createElement('input');
+                    i.type='hidden';
+                    i.name='fragment';
+                    i.value='<!DOCTYPE html>'+document.documentElement.outerHTML;
+                    f.appendChild(i);
+
+                    document.body.appendChild(f);
+                    f.submit();
+                }, 5000);
+            }
+        })
+    }
 </script>
 <script class="textArea-Tiny" type="text/javascript">
     tinymce.init({
@@ -123,7 +179,7 @@ if(isset($_GET) && !empty($_GET)){
 <section>
 
     <div class="container-formulario-anadir">
-        <form class="rellenar" action="<?php $_SERVER['PHP_SELF']?>" method="post" autocomplete="off" onsubmit="alert(examen.innerText)">
+        <form class="rellenar" action="<?php $_SERVER['PHP_SELF']?>" method="post" autocomplete="off">
             <ul class="listaFormulario">
                 <li><label for="nombre"> Título de la clase:</label><input name="nombre" type="text" required></li>
                 <li><label for="codigo_modulo"> Módulo de la clase:</label><select name="codigo_modulo" id="modulo" required></select></li>

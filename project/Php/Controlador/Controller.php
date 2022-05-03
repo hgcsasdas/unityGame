@@ -2,10 +2,18 @@
 
  class controller{
 
+    public function establecerConexion($dao){
+        if($dao == "users"){
+            $conexion = new BdUsers();
+        }else{
+            $conexion = new BdClasses();
+        }
+        return $conexion;
+    }
 
      public function guardarEnDB($tabla, $datos) {
          $exito = 0;
-         $conexion = new Bd();
+         $conexion = $this->establecerConexion($tabla);
          if ($tabla == "users") {
              $exito = $conexion->insertarUsuarios($datos);
          }elseif ($tabla == "classes") {
@@ -18,7 +26,7 @@
 
      public function leerEnDB($tabla, $datos) {
          $exito = false;
-         $conexion = new Bd();
+         $conexion = $this->establecerConexion($tabla);
          if ($tabla == "users") {
              $exito = $conexion->consultarUsuarios($datos);
          }elseif ($tabla == "classes") {
@@ -29,6 +37,19 @@
              $exito = $conexion->listarCursos();
          }
 
+         return $exito;
+     }
+
+     public function actualizarEnDB($tabla, $datos) {
+         $exito = false;
+         $conexion = $this->establecerConexion($tabla);
+         if ($tabla == "users") {
+             $exito = $conexion->actualizarUsuarios($datos);
+         }elseif ($tabla == "classes") {
+             $exito = $conexion->actualizarClases($datos);
+         }elseif ($tabla == "cursos") {
+             $exito = $conexion->actualizarCursos($datos);
+         }
          return $exito;
      }
 

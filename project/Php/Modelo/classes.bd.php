@@ -1,105 +1,12 @@
 <?php
-
-class Bd{
-
-    private $server = "localhost:3360";
-    private $usuario = "root";
-    private $pass = "1234";
-    private $basedatos = "indomath";
-
-    private $conexion;
+require_once "bd.php";
+class BdClasses extends Bd {
 
 
-    public function __construct(){
-
-        $this->conexion = new mysqli($this->server, $this->usuario, $this->pass, $this->basedatos);
-        $this->conexion->select_db($this->basedatos);
-        $this->conexion->query("SET NAMES 'utf8'");
+    public function __construct() {
+        parent::__construct();
     }
 
-    /**
-     * Metodo que lanza un insert a la BD con la posibilidad de incluir una foto.
-     * Para que funcione, deben llamarse igual los campos del formulario y los atributos de la bd
-     */
-
-    public function insertarUsuarios($datos){
-
-        $registroExitoso = 1;
-        $campoEmail = 3;
-        $contadorCampos=0;
-        $claves  = array();
-        $valores = array();
-        foreach ($datos as $clave => $valor){
-
-            if($clave != "id" && $clave != "confirmacion" && $clave != "h-captcha-response" && $clave != "g-recaptcha-response") {
-                $claves[] = addslashes($clave);
-                if($clave == "mail") {
-                    $campoEmail=$contadorCampos;
-                }
-                    if($clave != "contrasena") {
-                    $valores[] = ("'" . addslashes($valor) . "'");
-                }else{
-                    $valores[] = ("'" . $this->asignarContrasena($valor) . "'");
-                }
-            }
-            $contadorCampos++;
-        }
-
-        if($this->verificarUsuario($valores[$campoEmail])==0) {
-            $sql = "insert into users (" . implode(', ', $claves) . ") values (" . implode(', ', $valores) . ")";
-            $resultado = $this->conexion->query($sql);
-        }else{
-            $registroExitoso=0;
-        }
-
-        return $registroExitoso;
-    }
-
-    public function verificarUsuario($email){
-        $userExistente = 0;
-        $existeEmail = 'select * from users where mail = ' . $email;
-        $result = $this->conexion->query($existeEmail)->num_rows;
-        if ($result != 0){
-            $userExistente = 1;
-        }
-        return $userExistente;
-    }
-
-    public function asignarContrasena($contrasena){
-        return password_hash($contrasena, PASSWORD_DEFAULT);
-    }
-
-
-
-    public function consultaSimple($consulta){
-        //echo "el sql".$consulta ."fin";
-        $resultado =   $this->conexion->query($consulta);
-
-        $res = mysqli_fetch_assoc($resultado);
-
-        return $res;
-    }
-
-
-    public function consultarUsuarios($datos){
-        $tabla = "users";
-        $validadoCorrecto = 0;
-        foreach ($datos as $clave => $valor){
-            $$clave = $valor;
-        }
-        $sql = 'select contrasena from '.$tabla.' where mail = "' . $mail.'"';
-        $resultado =   $this->conexion->query($sql);
-        try {
-            $pass = implode(mysqli_fetch_assoc($resultado));
-            if (password_verify($contrasena, $pass)) {
-                $validadoCorrecto = 1;
-            }
-        }catch (TypeError $te){
-            $validadoCorrecto = 0;
-        }
-        return $validadoCorrecto;
-    }
-  
     public function consultarClases($datos){
         $tabla = "classes";
 
@@ -187,6 +94,102 @@ class Bd{
 
             return $registroExitoso;
         }
+    public function actualizarClases($datos){
+
+            $registroExitoso = 1;
+            $idExamen = "";
+            $idLeccion = "";
+            $clavesLeccion = [];
+            $clavesExamen = [];
+            $valoresLeccion = [];
+            $valoresExamen = [];
+
+            foreach ($datos as $clave => $valor){
+                    if($clave == "id"){
+                            $clavesExamen[] = addslashes("cod_examen");
+                        }else if($clave == "duracionEx"){
+                            $clavesExamen[] =  addslashes("duracion");
+                        }else if($clave == "examen"){
+                            $clavesExamen[] =  addslashes("contenido");
+                        }else {
+                        $clavesLeccion[] = addslashes($clave);
+                    }
+                    if ($clave == "video") {
+                        $valorRespaldo = $valor;
+                        try {
+                            if(isset(explode("=", $valor)[1]) && explode("=", $valor)[1] != ""){
+                                $urlFragmentos = explode("&", explode("=", $valor)[1]);
+                                $valor = "https://www.youtube.com/embed/" . $urlFragmentos[0];
+                            }else{
+                                $valor = $valorRespaldo;
+                            }
+                        } catch (TypeError $te) {
+                            $valor = $valorRespaldo;
+                        }
+                    }
+                    if ($clave == "examen") {
+                        $valorRespaldo = $valor;
+                        $urlFragmentos = explode("worksheet", explode('" style="width:100 % ">', $valor)[0]);
+                        if(isset(explode("span>", $valor)[1]) && explode("span>", $valor)[1] != ""){
+                        $urlFragmentos2 = explode("span>", $valor)[1];
+                        $urlIdExamen = explode('" style="', $urlFragmentos[1])[0];
+                        $valor = $urlFragmentos[0] . 'worksheet' . $urlIdExamen . '"> ' . $urlFragmentos2;
+                        $valor = str_replace("'", '"', $valor);
+
+                    }else{
+                        $valor = $valorRespaldo;
+                    }
+                    }
+                    if ($clave == "id" || $clave== "duracionEx" || $clave == "examen") {
+                        $valoresExamen[] = ("'" . addslashes($valor) . "'");
+                        if($clave == "examen"){
+                            $idExamen = $valor;
+                        }
+                    } else {
+                        if($clave == "codigo_clase"){
+                            $idLeccion = $valor;
+                        }
+                    $valoresLeccion[] = ("'" . addslashes($valor) . "'");
+                }
+                }
+
+        $sqlExamenes = "update exam set ";
+        $sqlLecciones = "update classes set ";
+        for ($i = 0; $i < sizeof($clavesLeccion); $i++) {
+            if ($i == sizeof($clavesLeccion) - 1) {
+                $sqlLecciones .= " where " . $clavesLeccion[$i] . " = " . $valoresLeccion[$i];
+            } else {
+                if ($i != 0) {
+                    $sqlLecciones .= ", ";
+                }
+                $sqlLecciones .= $clavesLeccion[$i] . " = " . $valoresLeccion[$i];
+            }
+        }
+
+        for ($i = 0; $i < sizeof($clavesExamen); $i++) {
+            if ($i == sizeof($clavesExamen) - 1) {
+                $sqlExamenes .= " where " . $clavesExamen[$i] . " = " . $valoresExamen[$i];
+            } else {
+                if ($i != 0) {
+                    $sqlExamenes .= ", ";
+                }
+                $sqlExamenes .= $clavesExamen[$i] . " = " . $valoresExamen[$i];
+            }
+        }
+
+        $resultado = $this->conexion->query($sqlExamenes);
+        $resultado2 = $this->conexion->query($sqlLecciones);
+
+
+        if ($resultado < 0 || $resultado2 < 0) {
+            $registroExitoso = 0;
+        } else {
+            $registroExitoso = 1;
+        }
+
+        return $registroExitoso;
+
+    }
 
     public function listarCursos(){
         $tabla = "modules";
@@ -222,31 +225,6 @@ class Bd{
 
             return $registroExitoso;
         }
-
-
-    public function consultarModulos($datos){
-        $sql = 'select id_modulo, titulo from modules';
-        $data = $this->conexion->query($sql);
-        $modulos =[];
-        $valores =[];
-        while($row = mysqli_fetch_array($data)) {
-            array_push($modulos,$row[0]);
-            array_push($valores,$row[1]);
-        }
-        $courses=[];
-        for($i = 0;$i<sizeof($modulos);$i++){
-            array_push($courses,array("id" => $modulos[$i], "name"=>$valores[$i]));
-
-        }
-        return $courses;
-
-    }
-
-    public function consulta($consulta){
-        $resultado =   $this->conexion->query($consulta);
-        $res = $resultado ;
-        return $res;
-    }
 
 
 }

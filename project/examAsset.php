@@ -5,7 +5,7 @@
 include "Includes/head.php";
 include "Includes/nav.php";
 require "php/Modelo/Usuario.php";
-require "php/Modelo/class.bd.php";
+require "php/Modelo/classes.bd.php";
 require "php/Controlador/Controller.php";
 ?>
 

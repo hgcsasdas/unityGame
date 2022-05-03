@@ -3,7 +3,7 @@
 
 <?php
 require "php/Modelo/Usuario.php";
-require "php/Modelo/class.bd.php";
+require "php/Modelo/users.bd.php";
 require "php/Controlador/Controller.php";
 
 ?>
@@ -105,7 +105,6 @@ if (isset($_POST) && !empty($_POST)) {
 
             if (formulario.getElementsByTagName('input')[cont].value === "") {
                 ok = false;
-                alert("Te faltan campos por rellenar")
             }
             cont++;
         }

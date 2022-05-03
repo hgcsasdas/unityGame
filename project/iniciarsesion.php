@@ -3,7 +3,7 @@
 
 <?php
 require "php/Modelo/Usuario.php";
-require "php/Modelo/class.bd.php";
+require "php/Modelo/users.bd.php";
 require "php/Controlador/Controller.php";
 ?>
 <?php
