@@ -8,7 +8,7 @@ require_once "php/Modelo/users.bd.php";
 require "php/Controlador/Controller.php";
 ?>
 <?php
-//poner cursos en mayusculas
+//poner modulos en mayusculas
 $controller = new controller();
 
 $modulos =  $controller->leerEnDB("modules", "");
@@ -36,7 +36,7 @@ if (isset($_POST) && !empty($_POST)) {
 
         <div class="item-cursos" >
             <div class="item-cursos-img">
-                <a href="classAssetIntroduction.php?id=1" ><img src="Imgs/cursos/1bach.jpg" alt=""></a>
+                <a href="classAssetIntroduction.php?id=1" ><img src="Imgs/modulos/1bach.jpg" alt=""></a>
             </div>
             <div class="item-cursos-url">
                 <a href="classAssetIntroduction.php?id=1">1 bach mates ciencias</a>
@@ -44,7 +44,7 @@ if (isset($_POST) && !empty($_POST)) {
         </div>
         <div class="item-cursos">
             <div class="item-cursos-img">
-                <a href="classAssetIntroduction.php?id=2"><img src="Imgs/cursos/1bach.jpg" alt=""></a>
+                <a href="classAssetIntroduction.php?id=2"><img src="Imgs/modulos/1bach.jpg" alt=""></a>
             </div>
             <div class="item-cursos-url">
                 <a href="classAssetIntroduction.php?id=2">1 bach mates letras</a>
@@ -53,7 +53,7 @@ if (isset($_POST) && !empty($_POST)) {
       
         <div class="item-cursos">
             <div class="item-cursos-img">
-                <a href=""><img src="Imgs/cursos/2bachillerato.jpg" alt=""></a>
+                <a href=""><img src="Imgs/modulos/2bachillerato.jpg" alt=""></a>
             </div>
             <div class="item-cursos-url">
                 <a href="#">2 bach mates ciencias</a>
@@ -61,7 +61,7 @@ if (isset($_POST) && !empty($_POST)) {
         </div>
         <div class="item-cursos">
             <div class="item-cursos-img">
-                <a href=""><img src="Imgs/cursos/2bachillerato.jpg" alt=""></a>
+                <a href=""><img src="Imgs/modulos/2bachillerato.jpg" alt=""></a>
             </div>
             <div class="item-cursos-url">
                 <a href="#">2 bach mates letras</a>
@@ -69,7 +69,7 @@ if (isset($_POST) && !empty($_POST)) {
         </div>
         <div class="item-cursos">
             <div class="item-cursos-img">
-                <a href=""><img src="Imgs/cursos/2bachillerato.jpg" alt=""></a>
+                <a href=""><img src="Imgs/modulos/2bachillerato.jpg" alt=""></a>
             </div>
             <div class="item-cursos-url">
                 <a href="#">Carrera ADE</a>

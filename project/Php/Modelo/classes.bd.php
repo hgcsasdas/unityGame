@@ -2,7 +2,6 @@
 require_once "bd.php";
 class BdClasses extends Bd {
 
-
     public function __construct() {
         parent::__construct();
     }
@@ -20,7 +19,6 @@ class BdClasses extends Bd {
 
     public function listarClases($datos){
         $tabla = "classes";
-
         $codigoModulo = $datos['id'];
         $sql  = 'select c.codigo_clase, m.id_modulo, upper(m.titulo) as titulo, c.nombre, m.resumen, (select count(*) from ' . $tabla . ' as c join modules m on c.codigo_modulo = '.$codigoModulo.' where c.codigo_modulo = m.id_modulo) as "numLecciones", c.duracion as cduracion, c.codigo_examen, e.duracion as eduracion, e.contenido as examenURL, c.video, c.contenido from ' . $tabla . ' as c join modules m on c.codigo_modulo = m.id_modulo join exam e on e.cod_examen = c.codigo_examen where codigo_modulo=' . $codigoModulo ;
         $data = $this->conexion->query($sql);
@@ -32,6 +30,14 @@ class BdClasses extends Bd {
 
         return $lecciones;
 
+    }
+    public function buscarSiExisteClase($datos){
+        $tabla = "classes";
+        $codigoModulo = $datos['id_modulo'];
+        $codigoClase = $datos['codigo_clase'];
+        $sql  = 'select * from ' . $tabla . ' as c left join modules m on c.codigo_modulo = m.id_modulo where c.codigo_clase = ' . $codigoClase . ' and c.codigo_modulo = ' . $codigoModulo ;
+        $data = $this->conexion->query($sql);
+        return $data->num_rows;
     }
 
     public function insertarClases($datos){
@@ -226,6 +232,28 @@ class BdClasses extends Bd {
             return $registroExitoso;
         }
 
+        function eliminarClases($datos){
+
+            $resultadoListado = true;
+            $registroExitoso = 1;
+            $sql = "delete from classes where codigo_modulo = " . $datos['id_modulo'] . " and codigo_clase = " . $datos['codigo_clase'];
+            $resultado = $this->conexion->query($sql);
+            $sql = "delete from exam where cod_examen = " . $datos['codigo_examen'];
+            $resultado2 = $this->conexion->query($sql);
+
+            $resultadoListado = $this->buscarSiExisteClase($datos);
+
+            if ($resultado < 0 || $resultado2 < 0 || $resultadoListado == true) {
+                $registroExitoso = 0;
+            } else {
+                $registroExitoso = 1;
+            }
+
+
+            return $registroExitoso;
+
+
+            }
 
 }
 ?>

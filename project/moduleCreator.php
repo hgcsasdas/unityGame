@@ -18,18 +18,18 @@ if (isset($_POST) && !empty($_POST)){
 
     $fotoURL ="";
     try {
-        $path =  'Imgs/cursos/';
+        $path =  'Imgs/modulos/';
 
         if (move_uploaded_file($_FILES['foto']['tmp_name'],$path.$_FILES['foto']['name'])){
 
             $fotoURL = $path.$_FILES['foto']['name'];
         }
     }catch (Exception $e) {
-            $fotoURL = 'Imgs/cursos/1bach.jpg';
+            $fotoURL = 'Imgs/modulos/1bach.jpg';
     }
     $_POST['foto']=$fotoURL;
 
-    if ($controller->guardarEnDB("cursos",$_POST)) {
+    if ($controller->guardarEnDB("modulos",$_POST)) {
             echo '<div><script type="module">correctRegister()</script></div>';
         } else {
             echo '<div><script type="module">failedRegister()</script></div>';

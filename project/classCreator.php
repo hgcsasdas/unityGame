@@ -12,7 +12,7 @@ require "php/Modelo/classes.bd.php";
 require "php/Controlador/Controller.php";
 ?>
 <?php
-//poner cursos en mayusculas
+//poner modulos en mayusculas
 $controller = new controller();
 
 $modulos =  $controller->leerEnDB("modules", "");
@@ -39,32 +39,45 @@ if (isset($_POST) && !empty($_POST)){
     }
 }
 if(isset($_GET) && !empty($_GET)){
+    try {
+        $datos = ($controller->leerEnDB("classes2", $_GET));
 
-    $datos =  ($controller->leerEnDB("classes2", $_GET));
-
-    echo "<script type='module'>llenarDatos(".$_GET['c'].", ".$datos.");</script>";
+        echo "<script type='module'>llenarDatos(" . $_GET['c'] . ", " . $datos . ");</script>"; //Comprobar que la clase exista
+    } catch (Exception $e) {
+        header("Location: modulos.php"); //redireccionar
+        echo "Debe crear una clase primero";
+    }
 }
 
 ?>
 <body>
 <script>
-    function llenarDatos(id, clase){
+    let identificadores = [];
+    function llenarDatos(id, clase) {
 
-        let indiceClase=0;
-        for (let i=0;i<clase.length;i++){
-            if(clase[i]['codigo_clase']==id){
-                indiceClase=i;
+        let indiceClase = 0;
+        for (let i = 0; i < clase.length; i++) {
+            if (clase[i]['codigo_clase'] == id) {
+                indiceClase = i;
             }
         }
 
         let leccion = clase[indiceClase];
         let leccionArray = new Array();
-        console.log(leccion);
 
-        for(let i in leccion){
+        for (let i in leccion) {
             leccionArray.push(leccion[i]);
+            if (i == 'id_modulo') {
+                identificadores['id_modulo']=leccion[i];
+            } else if (i == 'codigo_clase') {
+                identificadores['codigo_clase']=leccion[i];
+            } else if (i == 'codigo_examen') {
+                identificadores['codigo_examen']=leccion[i];
+            }
+
+
         }
-        console.log(leccionArray);
+
         let campos = document.getElementsByTagName("input");
         let modulo = document.getElementsByTagName("select");
         let desc = document.getElementsByTagName("textarea")
@@ -117,25 +130,12 @@ if(isset($_GET) && !empty($_GET)){
             cancelButtonText: '¡No, mantenerla!'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    'Eliminada!',
-                    'La clase ha sido eliminada satisfactoriamente.',
-                    'success'
-                )
-                setTimeout((redireccionar)=>{
-                    let f = document.createElement('datosAEliminar');
-                    f.action='cursos.php';
-                    f.method='POST';
+                let getValues ="";
+                for (let i in identificadores) {
+                    getValues += i + "=" + identificadores[i] + "&";
+                }
+                window.location.replace('eliminar.php?' + getValues);
 
-                    var i=document.createElement('input');
-                    i.type='hidden';
-                    i.name='fragment';
-                    i.value='<!DOCTYPE html>'+document.documentElement.outerHTML;
-                    f.appendChild(i);
-
-                    document.body.appendChild(f);
-                    f.submit();
-                }, 5000);
             }
         })
     }

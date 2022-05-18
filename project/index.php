@@ -6,35 +6,35 @@
 <section class="body">
     <div class="img-slider">
         <div class="slide active">
-            <img src="Imgs/Imagen3.png" alt="">
+            <img src="Imgs/slides/Imagen3.png" alt="">
             <div class="info">
                 <h2>INDOMATH</h2>
                 <p>No creemos en tus limites, vamos más allá,</p>
             </div>
         </div>
         <div class="slide">
-            <img src="Imgs/Imagen6.png" alt="">
+            <img src="Imgs/slides/Imagen6.png" alt="">
             <div class="info">
                 <h2>INDOMATH</h2>
                 <p>Entrega siempre más de lo que se espera de ti.</p>
             </div>
         </div>
         <div class="slide">
-            <img src="Imgs/Imagen5.png" alt="">
+            <img src="Imgs/slides/Imagen5.png" alt="">
             <div class="info">
                 <h2>INDOMATH</h2>
                 <p>Busca tu mejor profesor con nosotros.</p>
             </div>
         </div>
         <div class="slide">
-            <img src="Imgs/Imagen4.png" alt="">
+            <img src="Imgs/slides/Imagen4.png" alt="">
             <div class="info">
                 <h2>INDOMATH</h2>
                 <p>Entrega siempre más de lo que se espera de ti.</p>
             </div>
         </div>
         <div class="slide">
-            <img src="Imgs/Imagen3.png" alt="">
+            <img src="Imgs/slides/Imagen3.png" alt="">
             <div class="info">
                 <h2>INDOMATH</h2>
                 <p>Si puedes soñarlo, puedes hacerlo.</p>

@@ -18,7 +18,7 @@
              $exito = $conexion->insertarUsuarios($datos);
          }elseif ($tabla == "classes") {
              $exito = $conexion->insertarClases($datos);
-         }elseif ($tabla == "cursos") {
+         }elseif ($tabla == "modulos") {
              $exito = $conexion->insertarCursos($datos);
          }
          return $exito;
@@ -47,15 +47,28 @@
              $exito = $conexion->actualizarUsuarios($datos);
          }elseif ($tabla == "classes") {
              $exito = $conexion->actualizarClases($datos);
-         }elseif ($tabla == "cursos") {
+         }elseif ($tabla == "modulos") {
              $exito = $conexion->actualizarCursos($datos);
+         }
+         return $exito;
+     }
+
+     public function eliminarEnDB($tabla, $datos) {
+         $exito = false;
+         $conexion = $this->establecerConexion($tabla);
+         if ($tabla == "users") {
+             $exito = $conexion->eliminarUsuarios($datos);
+         }elseif ($tabla == "classes") {
+             $exito = $conexion->eliminarClases($datos);
+         }elseif ($tabla == "modulos") {
+             $exito = $conexion->eliminarCursos($datos);
          }
          return $exito;
      }
 
 
 
-    public function verificarCaptcha($captcha) {
+     public function verificarCaptcha($captcha) {
         $privatekey = "0xB5ba8764f740eb8631D4652cd5363a15fbdA5e96";
 
         $data = array(

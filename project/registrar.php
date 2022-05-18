@@ -20,6 +20,7 @@ if (isset($_POST) && !empty($_POST)) {
     $controlador = new Controller();
     if ($controlador->verificarCaptcha($_POST['h-captcha-response'])) {
         if ($controlador->guardarEnDB("users",$_POST)) {
+
             echo '<div><script type="module">correctRegister()</script></div>';
         } else {
             echo '<div><script type="module">failedRegister()</script></div>';
